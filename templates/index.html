@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Dashboard</h1>
+        <form method="POST">
+            <input type="text" name="city" placeholder="Enter city name..." required>
+            <button type="submit">Get Weather</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if weather %}
+            <div class="weather-card">
+                <h2>{{ weather.city }}</h2>
+                <p class="temp">{{ weather.temp }}°C</p>
+                <p>Feels like {{ weather.feels_like }}°C</p>
+                <p>{{ weather.description }}</p>
+                <p>Humidity: {{ weather.humidity }}%</p>
+            </div>
+        {% endif %}
+
+        {% if forecast %}
+            <div class="forecast">
+                <h3>5-Day Forecast</h3>
+                <div class="forecast-grid">
+                    {% for day in forecast %}
+                        <div class="forecast-day">
+                            <p class="date">{{ day.date }}</p>
+                            <p class="ftemp">{{ day.temp }}°C</p>
+                            <p class="fdesc">{{ day.description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
